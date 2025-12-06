@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moroccan English Teachers Community</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#"><i class="bi bi-mortarboard-fill me-2"></i>MET Community</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" id="nav-home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="nav-categories">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="nav-teachers">Teachers</a>
+                    </li>
+                </ul>
+                <div class="d-flex" id="auth-buttons">
+                    <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+                </div>
+                <div class="d-none" id="user-menu">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle me-1"></i><span id="username-display"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="profile-link">Profile</a></li>
+                            <li><a class="dropdown-item" href="#" id="my-posts-link">My Posts</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="admin-panel" style="display: none;">Admin Panel</a></li>
+                            <li><a class="dropdown-item" href="#" id="logout-btn">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mt-5 pt-5">
+        <!-- Welcome Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card bg-gradient-primary text-white">
+                    <div class="card-body text-center py-5">
+                        <h1 class="display-4 fw-bold mb-3">Welcome to Moroccan English Teachers Community</h1>
+                        <p class="lead mb-4">Share ideas, experiences, and best practices for teaching English in Morocco</p>
+                        <button class="btn btn-light btn-lg me-3" id="create-post-btn" style="display: none;">
+                            <i class="bi bi-plus-circle me-2"></i>Create Post
+                        </button>
+                        <button class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#registerModal">
+                            Join Community
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories Filter -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Filter by Category</h5>
+                        <div class="btn-group flex-wrap" role="group" id="category-filters">
+                            <button type="button" class="btn btn-outline-primary active" data-category="all">All Categories</button>
+                            <button type="button" class="btn btn-outline-primary" data-category="Classroom Activities">Classroom Activities</button>
+                            <button type="button" class="btn btn-outline-primary" data-category="Teaching Methods">Teaching Methods</button>
+                            <button type="button" class="btn btn-outline-primary" data-category="Lesson Plans">Lesson Plans</button>
+                            <button type="button" class="btn btn-outline-primary" data-category="Student Engagement">Student Engagement</button>
+                            <button type="button" class="btn btn-outline-primary" data-category="Classroom Management">Classroom Management</button>
+                            <button type="button" class="btn btn-outline-primary" data-category="Moroccan Curriculum">Moroccan Curriculum</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="search-input" placeholder="Search posts, topics, or teaching ideas...">
+                    <button class="btn btn-primary" type="button" id="search-btn">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Posts Feed -->
+        <div class="row">
+            <div class="col-12" id="posts-container">
+                <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More -->
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <button class="btn btn-primary btn-lg" id="load-more-btn" style="display: none;">
+                    Load More Posts
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login to MET Community</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="login-form">
+                        <div class="mb-3">
+                            <label for="login-username" class="form-label">Username or Email</label>
+                            <input type="text" class="form-control" id="login-username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="login-password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="login-password" required>
+                        </div>
+                        <div class="alert alert-danger d-none" id="login-error"></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="login-btn">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Join MET Community</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="register-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="register-username" class="form-label">Username *</label>
+                                    <input type="text" class="form-control" id="register-username" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="register-email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="register-email" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="register-password" class="form-label">Password *</label>
+                                    <input type="password" class="form-control" id="register-password" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="register-confirm-password" class="form-label">Confirm Password *</label>
+                                    <input type="password" class="form-control" id="register-confirm-password" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="register-fullname" class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" id="register-fullname" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="register-school" class="form-label">School/Institution</label>
+                                    <input type="text" class="form-control" id="register-school">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="register-level" class="form-label">Teaching Level</label>
+                                    <select class="form-select" id="register-level">
+                                        <option value="">Select Level</option>
+                                        <option value="Primary (1-6)">Primary (1-6)</option>
+                                        <option value="Middle School (7-9)">Middle School (7-9)</option>
+                                        <option value="High School (10-12)">High School (10-12)</option>
+                                        <option value="All Levels">All Levels</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="register-experience" class="form-label">Years of Experience</label>
+                                    <input type="number" class="form-control" id="register-experience" min="0" max="50">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="register-bio" class="form-label">Bio</label>
+                            <textarea class="form-control" id="register-bio" rows="3" placeholder="Tell us a bit about yourself..."></textarea>
+                        </div>
+                        <div class="alert alert-danger d-none" id="register-error"></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="register-btn">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/posts.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

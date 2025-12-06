@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Post - Moroccan English Teachers Community</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-mortarboard-fill me-2"></i>MET Community</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#categories">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#teachers">Teachers</a>
+                    </li>
+                </ul>
+                <div class="d-flex" id="auth-buttons">
+                    <a href="index.html#login" class="btn btn-outline-light me-2">Login</a>
+                    <a href="index.html#register" class="btn btn-warning">Register</a>
+                </div>
+                <div class="d-none" id="user-menu">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle me-1"></i><span id="username-display"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="index.html#profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="index.html#my-posts">My Posts</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="index.html#admin" id="admin-panel" style="display: none;">Admin Panel</a></li>
+                            <li><a class="dropdown-item" href="#" id="logout-btn">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mt-5 pt-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Post Content -->
+                <div id="post-content">
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comments Section -->
+                <div id="comments-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Comments</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Add Comment Form -->
+                            <div id="add-comment-form" class="mb-4" style="display: none;">
+                                <div class="mb-3">
+                                    <textarea class="form-control comment-textarea" id="comment-content" 
+                                              placeholder="Share your thoughts on this teaching idea..." rows="3"></textarea>
+                                </div>
+                                <button class="btn btn-primary" id="submit-comment-btn">
+                                    <i class="bi bi-send me-2"></i>Post Comment
+                                </button>
+                            </div>
+                            
+                            <!-- Login to Comment -->
+                            <div id="login-to-comment" class="text-center py-4">
+                                <p class="text-muted mb-3">Please login to join the discussion</p>
+                                <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+                            </div>
+                            
+                            <!-- Comments List -->
+                            <div id="comments-list">
+                                <div class="text-center py-4">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Loading comments...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Post Stats -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6 class="mb-0">Post Statistics</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <div id="post-upvotes" class="h5 mb-1">0</div>
+                                <small class="text-muted">Upvotes</small>
+                            </div>
+                            <div class="col-4">
+                                <div id="post-downvotes" class="h5 mb-1">0</div>
+                                <small class="text-muted">Downvotes</small>
+                            </div>
+                            <div class="col-4">
+                                <div id="post-views" class="h5 mb-1">0</div>
+                                <small class="text-muted">Views</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Author Info -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6 class="mb-0">Author</h6>
+                    </div>
+                    <div class="card-body text-center">
+                        <div id="author-avatar" class="mb-3">
+                            <div class="post-avatar mx-auto" style="width: 80px; height: 80px;">
+                                <img id="author-avatar-img" src="" alt="" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                            </div>
+                        </div>
+                        <h6 id="author-name" class="mb-1">Loading...</h6>
+                        <p id="author-username" class="text-muted mb-2">@username</p>
+                        <p id="author-bio" class="small text-muted mb-3">Loading...</p>
+                        <div id="author-stats" class="row text-center">
+                            <div class="col-4">
+                                <div id="author-posts-count" class="h6 mb-0">0</div>
+                                <small class="text-muted">Posts</small>
+                            </div>
+                            <div class="col-4">
+                                <div id="author-comments-count" class="h6 mb-0">0</div>
+                                <small class="text-muted">Comments</small>
+                            </div>
+                            <div class="col-4">
+                                <div id="author-joined" class="h6 mb-0">-</div>
+                                <small class="text-muted">Joined</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Posts -->
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="mb-0">Related Posts</h6>
+                    </div>
+                    <div class="card-body">
+                        <div id="related-posts">
+                            <p class="text-muted">Loading related posts...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Login/Register Modals -->
+    <div id="auth-modals"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/posts.js"></script>
+    <script src="js/comments.js"></script>
+    <script src="js/post-detail.js"></script>
+</body>
+</html>
